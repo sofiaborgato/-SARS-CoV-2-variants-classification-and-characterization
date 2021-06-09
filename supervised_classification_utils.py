@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[1]:
 
 
 def classifier(data,test):
     from sklearn.preprocessing import StandardScaler
+    from sklearn.ensemble import RandomForestClassifier
     best_columns=['s_ORF1ab', 'del_ORF1ab', 'mnc_S', 'del_S', 's_E', 's_M', 'mc_N',
        'mnc_N', 'del_N', 'mnc_NON_COD']
     
