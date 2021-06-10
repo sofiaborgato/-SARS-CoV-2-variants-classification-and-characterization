@@ -118,6 +118,10 @@ def sortFreqDict(freqdict):
   aux.reverse()
   return aux
 
+
+
+
+
 def process_mutations(ref,seq_2):
 
   mutation_types = ['silent','non sense','missense conservative','missense non conservative','deletion in frame','insertion in frame','deletion frame-shift', 'insertion frame-shift']
@@ -349,7 +353,7 @@ def align_and_process(input, string_length = 1000):
   ref=read('original_covid_genome.fasta')[0]    #reference sequence
 
   #Initialization of the outputs
-  col = ["Full sequence", "ORF1ab", "S", "ORF3a", "E", "M", "ORF6", "ORF7a", "ORF7b", "ORF8", "N", "ORF10", "label"]
+  col = ["Reference aligned", "Full sequence", "ORF1ab", "S", "ORF3a", "E", "M", "ORF6", "ORF7a", "ORF7b", "ORF8", "N", "ORF10", "label"]
   total_aligned = pd.DataFrame(columns = col)
   data=[]
   mutation_list=[]
@@ -363,7 +367,7 @@ def align_and_process(input, string_length = 1000):
 
     data.append(new_row)
     mutation_list=mutation_list+m_list
-    total_aligned = total_aligned.append({'Full sequence': seq2, 'ORF1ab': seq2[265:21555], 'S': seq2[21562:25384], 'ORF3a': seq2[25392:26220], 'E': seq2[26244:26472], 'M' : seq2[26522:27191], 'ORF6' : seq2[27201:27387], 'ORF7a' : seq2[27393:27759], 'ORF7b' : seq2[27755:27887], 'ORF8' : seq2[27893:28259], 'N' : seq2[28273:29533], 'ORF10' : seq2[29557:29674], 'label' : -1}, ignore_index=True)
+    total_aligned = total_aligned.append({'Reference aligned': seq1, 'Full sequence': seq2, 'ORF1ab': seq2[265:21555], 'S': seq2[21562:25384], 'ORF3a': seq2[25392:26220], 'E': seq2[26244:26472], 'M' : seq2[26522:27191], 'ORF6' : seq2[27201:27387], 'ORF7a' : seq2[27393:27759], 'ORF7b' : seq2[27755:27887], 'ORF8' : seq2[27893:28259], 'N' : seq2[28273:29533], 'ORF10' : seq2[29557:29674], 'label' : -1}, ignore_index=True)
     
     #verbose
     if not (i+1)%5:
