@@ -412,5 +412,5 @@ def key_mutations(mutation_list, length):
 #Function to save the outputs as csv given a name
 def export_data(stats, genome_aligned, key_mutations, name = "new"):
   stats.to_csv(name + "_stats.csv", index = False)
-  genome_aligned.to_csv(name + "_aligned_new.csv", index = False)
+  genome_aligned.to_csv(name + "_genomes_aligned.csv", index = False)
   key_mutations.to_csv(name + "_key_mutations.csv", index = False)
