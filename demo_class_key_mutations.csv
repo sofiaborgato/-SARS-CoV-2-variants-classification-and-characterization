@@ -1,0 +1,8 @@
+Mutation (Nucleotide),Mutation (Amminoacid),Type,Gene,Percentage
+C3037T,F924F,silent,ORF1ab,100.0
+A23403G,D614G,missense non conservative,S,100.0
+C14408T,L4715L,silent,ORF1ab,98.66666666666667
+del 11288:11296,-,deletion in frame,ORF1ab,79.33333333333333
+G23012A,E484K,missense non conservative,S,59.333333333333336
+C28887T,T205I,missense non conservative,N,59.333333333333336
+A23063T,N501Y,missense non conservative,S,59.333333333333336
