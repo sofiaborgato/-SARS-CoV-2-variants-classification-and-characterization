@@ -30,7 +30,8 @@ def classifier(data,test):
         pred.append(map[line])
     pred_df=pd.DataFrame()
     pred_df['Variant']=pred
-    ax=sns.countplot(x='Variant',data=pred_df,palette='Paired')
+    fig=sns.countplot(x='Variant',data=pred_df,palette='Paired')
+    fig.save_fig('classification_report_plot.png')
     
     
     
