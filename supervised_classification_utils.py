@@ -24,7 +24,7 @@ def classifier(data,test):
     import matplotlib.pyplot as plt
     map = {0 : "Original", 1 : "Californian", 2 : "Brazilian", 3 : "English", 4 : "Nigerian", 5 : "South African"}
     pred=[]
-    for line in prediction:
+    for line in target_test:
         pred.append(map[line])
     pred_df=pd.DataFrame()
     pred_df['Variant']=pred
@@ -32,6 +32,6 @@ def classifier(data,test):
     
     
     
-    return target_test
+    return pred_df
     
 
