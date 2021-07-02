@@ -97,7 +97,29 @@ def clustering(control,test):
     prediction = []
     for i in range(0,len(test)):
         prediction.append((cl_dict[labels[len(control)+i]]))   
-   
+    prediction_pair=pd.DataFrame({'true_label':label,'pred':labels})
+
+
+    # Create crosstab: ct
+    ct = pd.crosstab(prediction_pair['true_label'], prediction_pair['pred'])
+
+    # Display ct
+    confusion_matrix=np.array(ct)
+
+    m=[]
+
+    map = {0 : "Original", 1 : "Californian", 2 : "Brazilian", 3 : "English", 4 : "Nigerian", 5 : "South African",-1:"Test samples"}
+    for variant in range(-1,6):
+      for cluster in range(-1,num_cluster-1):
+        m.append([confusion_matrix[variant+1,cluster+1],map[variant],cluster])
+    df=pd.DataFrame(m,columns=["Value", "Variant", "Cluster"])
+
+    c = sns.color_palette('Paired')
+    ax = sns.catplot(x="Cluster", y="Value", hue="Variant", kind="bar", data=df,height=7, aspect=1.4,palette="Paired")
+    plt.ylabel('Number of samples', fontsize=13)
+    plt.xlabel('Cluster', fontsize=13)
+    fig = ax.get_figure()
+    fig.savefig('./Output/clustering_report_plot.png')
     
     return prediction, n_variants-len(pd.unique(control.label))
 
