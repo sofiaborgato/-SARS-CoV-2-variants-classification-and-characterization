@@ -119,8 +119,9 @@ def clustering(control,test):
     plot = sns.catplot(x="Cluster", y="Value", hue="Variant", kind="bar", data=df,height=7, aspect=1.4,palette="Paired")
     plt.ylabel('Number of samples', fontsize=13)
     plt.xlabel('Cluster', fontsize=13)
+   
     fig = plot.fig
-    fig.savefig('./Output/clustering_report_plot.png')
+    fig.savefig('./Output/clustering_report_plot.png', bbox_inches='tight')
     
     return prediction, n_variants-len(pd.unique(control.label))
 
