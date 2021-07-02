@@ -402,7 +402,7 @@ def key_mutations(mutation_list, length):
   mutation_freq = listToFreq(mutation_list)
   mutation_freq = sortFreqDict(mutation_freq)
   for s in mutation_freq: 
-    if s[0] > length*0.50: 
+    if s[0] > length*0.30: 
       
       most_freq_mut.append([s[1][0],s[1][1],s[1][2],s[1][3],s[0]/length*100])  #we append to the output only the ones which occurs at least in 50% of the cases
 
