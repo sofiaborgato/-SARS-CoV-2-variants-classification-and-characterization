@@ -11,3 +11,6 @@ We used genome sequences from [`GISAID Dataset`](https://www.gisaid.org/). The d
 * 1000 samples from lineage B.1.427/B.1.429 (Californian variant)
 * 1000 samples from lineage B.1.525 (Nigerian variant)
 * 500 samples from lineage B.1.617 (Indian variant)
+
+## Report of the work
+A detailed description of the project and the analyses performed can be found [`here`](./Report/Report.pdf)
