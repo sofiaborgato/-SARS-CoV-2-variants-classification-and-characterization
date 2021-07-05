@@ -3,7 +3,7 @@ Preprocessing and description of SARS-CoV-2 genomes and classification into vari
 Final project for the course "Bioinformatics", A.Y. 2020/2021.
 
 ## Data
-We used genome sequences from [`GISAID Dataset`](https://www.gisaid.org/). The dataset contains sequences 29kb long from the genome of the virus with <1% of unknown bases, divided according to the lineage considered and the date and place of submission. We download 6500 sequences:
+We used genome sequences from [`GISAID Dataset`](https://www.gisaid.org/). The dataset contains sequences 29kb long from the genome of the virus with <1% of unknown bases, divided according to the lineage considered and the date and place of submission. We downloaded 6500 sequences:
 * 1000 samples from the original cases from Wuhan in January 2020;
 * 1000 samples from lineage B.1.1.7 (English variant);
 * 1000 samples from lineage B.1.351 (South-African variant);
@@ -19,8 +19,8 @@ A detailed description of the project and the analyses performed can be found [`
 The root folder of the repo contains:
 * the code to be run as explained in the **Instructions** section;
 * the folder [`Data`](./Data), containing the FASTA files with the genome sequences and the inputs for the demo trial;
-* the folder [`Report`] with a detailed description of the project and the analyses performed;
-* the folder [`Classifiers`] containing the code for the different classifiers implemented;
+* the folder [`Report`](./Report) with a detailed description of the project and the analyses performed;
+* the folder [`Classifiers`](./Classifiers) containing the code for the different classifiers implemented;
 
 ## Instructions 
 In order to run the code it's sufficient to download and run from terminal the file [`main_def.py`](main_def.py).
