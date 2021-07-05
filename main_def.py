@@ -40,15 +40,15 @@ file.close()
 
 
 import pandas as pd
-total_al = pd.read_csv('./data_local_concat/local_aligned_.csv')
-total_stats=   pd.read_csv('./data_local_concat/stats.csv')
-genomes_aligned_class=pd.read_csv('./demo_class_aligned_new.csv')
-stats_class=pd.read_csv('./demo_class_stats.csv')
-key_mut_clust=pd.read_csv('./demo_class_key_mutations.csv')
+total_al = pd.read_csv('./data_local_concat/local_aligned_.csv') #dataset of the local aligned sequence
+total_stats=   pd.read_csv('./data_local_concat/stats.csv') #dataset of the local aligned statistics
+genomes_aligned_class=pd.read_csv('./demo_class_aligned_new.csv') #dataset with the demo aligned sequence
+stats_class=pd.read_csv('./demo_class_stats.csv') #dataset with the demo statistics 
+key_mut_clust=pd.read_csv('./demo_class_key_mutations.csv') #dataset describing key mutation of the demo data
 
-genomes_aligned_clust=pd.read_csv('./demo_clust_aligned_new.csv')
-stats_clust=pd.read_csv('./demo_clust_stats.csv')
-key_mut_clust=pd.read_csv('./demo_clust_key_mutations.csv')
+genomes_aligned_clust=pd.read_csv('./demo_clust_aligned_new.csv') #dataset demo for clustering with the genomes of the indian variant aligned 
+stats_clust=pd.read_csv('./demo_clust_stats.csv')#dataset demo for clustering with the stats of the indian variant aligned
+key_mut_clust=pd.read_csv('./demo_clust_key_mutations.csv')#dataset demo for clustering with the key mutation of the indian variant aligned
 
 # In[5]:
 
@@ -67,16 +67,20 @@ while an_type != '1' and an_type != '2':
 
 
 if in_path != '0':
-    stats, genomes_aligned, mutation_list = align_and_process(in_path,string_length=500)
-    key_mut = key_mutations(mutation_list, len(stats))
-    export_data(stats, genomes_aligned,key_mut, name = "new")
+    stats, genomes_aligned, mutation_list = align_and_process(in_path,string_length=1500) #for each line in path align the genomes and store the result in 
+	#genomes aligned: the aligned genomes
+	#stats: statistics of the aligned genomes 
+	#mutation list :characterization of each mutation found 
+    key_mut = key_mutations(mutation_list, len(stats)) #for each line calculate the most frequent mutations
+    export_data(stats, genomes_aligned,key_mut, name = "new") #store the data in the output folder 
 
 if in_path ==  '0' and an_type == '1':
-    stats = stats_class
+	#use demo data 
+    stats = stats_class 
     genomes_aligned = genomes_aligned_class
     key_mut = key_mut_class
     export_data(stats, genomes_aligned,key_mut, name = "./Output/demo")
-    prediction=classifier(total_stats,stats)
+    prediction=classifier(total_stats,stats)#Classifies each line of the stats dataset with the corresponding variants using random forest classifier
     
     
     
@@ -85,7 +89,7 @@ elif in_path == '0' and an_type == '2':
 	genomes_aligned = genomes_aligned_clust
 	key_mut = key_mut_clust
 	export_data(stats, genomes_aligned,key_mut, name = "./Output/demo")
-	prediction, num_new_var = clustering(total_stats,stats)
+	prediction, num_new_var = clustering(total_stats,stats) 
 	stats['Predicted'] = prediction
 	if num_new_var > 0:
 		for i in range(num_new_var):
