@@ -33,8 +33,8 @@ def clustering(control,test):
     label=total['label']
     min_points=20#Set min points values for DBSCAN
     neighbors = NearestNeighbors(n_neighbors=2*len(total.columns),metric='euclidean')#Calculate the distances from the k nearest neighbors for each data 
-    neighbors_fit = neighbors.fit(data)
-    distances, indices = neighbors_fit.kneighbors(data)
+    neighbors_fit = neighbors.fit(data) 
+    distances, indices = neighbors_fit.kneighbors(data) #calculate the distances from the k-th neighbohrs
     distances = np.sort(distances, axis=0)
     distances = distances[:,1]
     
@@ -43,22 +43,22 @@ def clustering(control,test):
     
     dist=pd.Series(distances)
 
-    der1 = dist.diff()
+    der1 = dist.diff()#calculate the consecutive difference of each distance (a sort of first derivative)
 
-    th=30
+    th=30 #number of zero values set as threshold 
     counter = 0
     #Procedure to estimate the best eps number(well described in report)
     for i,k in enumerate(der1[:len(data)-1]):
         if k > -1:
-            if k == 0:
+            if k == 0:#if k=0 count the number of consecutive zero(step length)
 
                 counter = counter + 1
             else:
-                if counter < th:
-                    best_eps=distances[i-1]
+                if counter < th: # if the number of consecutive zero is less the the th
+                    best_eps=distances[i-1]#update the best epsilon found
                     break
                 else:
-                    counter = 0
+                    counter = 0 #go to the next sequence of zero
         
     print('best_eps= ' + str(best_eps))
     af = DBSCAN(eps=best_eps,min_samples=min_points,metric='euclidean').fit(data)#perform DBSCAN
@@ -78,8 +78,8 @@ def clustering(control,test):
     print("Silhouette Coefficient %0.3f"
           % metrics.silhouette_score(data, labels, metric='euclidean'))
     
-    n_variants=len(pd.unique(control.label))
-    n_clusters = len(pd.unique(labels))
+    n_variants=len(pd.unique(control.label)) #number of known variants 
+    n_clusters = len(pd.unique(labels))# number of cluster founded 
     cl_dict={}
     
     possible_clusters=np.sort(pd.Series(labels).unique())
