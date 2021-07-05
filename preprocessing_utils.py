@@ -371,7 +371,7 @@ def align_and_process(input, string_length = 1000):
     
     #verbose
     if not (i+1)%5:
-      print('Riga ' + str(i+1) + ': ' + str((i+1)/len(new_data)*100) + '%')
+      print('Row ' + str(i+1) + ': ' + str((i+1)/len(new_data)*100) + '%')
 
   #preparation of the header for the stats dataset
   col_ORF1ab = ["s_ORF1ab", "ns_ORF1ab", "mc_ORF1ab", "mnc_ORF1ab", "del_ORF1ab", "ins_ORF1ab", "fs_ORF1ab"]
