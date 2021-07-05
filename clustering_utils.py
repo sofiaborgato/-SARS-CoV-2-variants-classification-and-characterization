@@ -99,13 +99,13 @@ def clustering(control,test):
     prediction = []
     for i in range(0,len(test)):
         prediction.append((cl_dict[labels[len(control)+i]]))  #Store the prediction in an array 
-    prediction_pair=pd.DataFrame({'true_label':label,'pred':labels})
+    prediction_pair=pd.DataFrame({'true_label':label,'pred':labels})#compare true label with the one founded by clustering algo
 
 
     # Create crosstab: ct
     ct = pd.crosstab(prediction_pair['true_label'], prediction_pair['pred'])
 
-    # Display ct
+    #compute the confusion matrix
     confusion_matrix=np.array(ct)
 
     m=[]
