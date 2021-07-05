@@ -3,13 +3,13 @@
 
 # In[1]:
 
-
+#Function to compute the number of null values for each columns of the given dataset
 def nullscan(df_check):
     df_nulls = (df_check == 0) 
     nulls_per_col = df_nulls.sum(axis=0)
     nulls_per_col /= len(df_check.index)
     for line,col_name in zip(nulls_per_col,df_check.columns):
-        if line>0.99:
+        if line>0.99:#If the number of null values is >99% delete the columns
             df_check.drop(col_name,axis=1,inplace=True)
     return df_check
 
@@ -26,13 +26,13 @@ def clustering(control,test):
     from sklearn import metrics
     from statistics import mode
     import matplotlib.pyplot as plt
-    
+    #Concat the control dataset with the one given by the user(or in case the default ones)
     total=pd.concat([control,test])
-    total=nullscan(total)
-    data=total.drop('label',axis=1,inplace=False)
+    total=nullscan(total)#Check null values
+    data=total.drop('label',axis=1,inplace=False)#Drop the true labels
     label=total['label']
-    min_points=20
-    neighbors = NearestNeighbors(n_neighbors=2*len(total.columns),metric='euclidean')
+    min_points=20#Set min points values for DBSCAN
+    neighbors = NearestNeighbors(n_neighbors=2*len(total.columns),metric='euclidean')#Calculate the distances from the k nearest neighbors for each data 
     neighbors_fit = neighbors.fit(data)
     distances, indices = neighbors_fit.kneighbors(data)
     distances = np.sort(distances, axis=0)
@@ -47,6 +47,7 @@ def clustering(control,test):
 
     th=30
     counter = 0
+    #Procedure to estimate the best eps number(well described in report)
     for i,k in enumerate(der1[:len(data)-1]):
         if k > -1:
             if k == 0:
@@ -60,7 +61,7 @@ def clustering(control,test):
                     counter = 0
         
     print('best_eps= ' + str(best_eps))
-    af = DBSCAN(eps=best_eps,min_samples=min_points,metric='euclidean').fit(data)
+    af = DBSCAN(eps=best_eps,min_samples=min_points,metric='euclidean').fit(data)#perform DBSCAN
     
     labels = af.labels_
     n_clusters_ = len(np.unique(labels))
@@ -87,17 +88,17 @@ def clustering(control,test):
         cl = label[labels==l]
         cluster_out.append(cl)
     
-    for i in range(1,n_clusters): 
-        if mode(cluster_out[i])==-1:
-            cl_dict[i-1]=n_variants
+    for i in range(1,n_clusters): #for each cluster found with DBSCAN algo, assigne the label corresponding to the mode of the true label in the test set 
+        if mode(cluster_out[i])==-1:#if the mode correspond to the unlabled data (-1) a new variant is found
+            cl_dict[i-1]=n_variants #update the total num variants
             n_variants=n_variants+1
         else:
-            cl_dict[i-1]=mode(cluster_out[i])
+            cl_dict[i-1]=mode(cluster_out[i]) #else assigne the class mode to the cluster
     cl_dict[-1]=-1
     
     prediction = []
     for i in range(0,len(test)):
-        prediction.append((cl_dict[labels[len(control)+i]]))   
+        prediction.append((cl_dict[labels[len(control)+i]]))  #Store the prediction in an array 
     prediction_pair=pd.DataFrame({'true_label':label,'pred':labels})
 
 
@@ -108,7 +109,7 @@ def clustering(control,test):
     confusion_matrix=np.array(ct)
 
     m=[]
-
+    #visualize result 
     map = {0 : "Original", 1 : "Californian", 2 : "Brazilian", 3 : "English", 4 : "Nigerian", 5 : "South African",-1:"Test samples"}
     for variant in range(-1,6):
       for cluster in range(-1,n_clusters-1):
