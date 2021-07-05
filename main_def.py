@@ -22,14 +22,14 @@ from clustering_utils import clustering
 import tarfile
 
 # open file
-file = tarfile.open('./data.tar.xz') 
+file = tarfile.open('.Data/data.tar.xz') 
 # extracting file
 file.extractall()
   
 file.close()
 
 # open file
-file = tarfile.open('./data_local_concat.tar.xz') 
+file = tarfile.open('.Data/data_local_concat.tar.xz') 
 # extracting file
 file.extractall()
   
@@ -40,15 +40,15 @@ file.close()
 
 
 import pandas as pd
-total_al = pd.read_csv('./data_local_concat/local_aligned_.csv') #dataset of the local aligned sequence
-total_stats=   pd.read_csv('./data_local_concat/stats.csv') #dataset of the local aligned statistics
-genomes_aligned_class=pd.read_csv('./demo_class_aligned_new.csv') #dataset with the demo aligned sequence
-stats_class=pd.read_csv('./demo_class_stats.csv') #dataset with the demo statistics 
-key_mut_clust=pd.read_csv('./demo_class_key_mutations.csv') #dataset describing key mutation of the demo data
+total_al = pd.read_csv('.Data/data_local_concat/local_aligned_.csv') #dataset of the local aligned sequence
+total_stats=   pd.read_csv('.Data/data_local_concat/stats.csv') #dataset of the local aligned statistics
+genomes_aligned_class=pd.read_csv('.Data/demo_class_aligned_new.csv') #dataset with the demo aligned sequence
+stats_class=pd.read_csv('.Data/demo_class_stats.csv') #dataset with the demo statistics 
+key_mut_clust=pd.read_csv('.Data/demo_class_key_mutations.csv') #dataset describing key mutation of the demo data
 
-genomes_aligned_clust=pd.read_csv('./demo_clust_aligned_new.csv') #dataset demo for clustering with the genomes of the indian variant aligned 
-stats_clust=pd.read_csv('./demo_clust_stats.csv')#dataset demo for clustering with the stats of the indian variant aligned
-key_mut_clust=pd.read_csv('./demo_clust_key_mutations.csv')#dataset demo for clustering with the key mutation of the indian variant aligned
+genomes_aligned_clust=pd.read_csv('.Data/demo_clust_aligned_new.csv') #dataset demo for clustering with the genomes of the indian variant aligned 
+stats_clust=pd.read_csv('.Data/demo_clust_stats.csv')#dataset demo for clustering with the stats of the indian variant aligned
+key_mut_clust=pd.read_csv('.Data/demo_clust_key_mutations.csv')#dataset demo for clustering with the key mutation of the indian variant aligned
 
 # In[5]:
 
