@@ -14,9 +14,7 @@ def nullscan(df_check):
     return df_check
 
 
-# In[ ]:
-
-
+#Function to perform clustering on the dataset
 def clustering(control,test):
     import pandas as pd
     import numpy as np
