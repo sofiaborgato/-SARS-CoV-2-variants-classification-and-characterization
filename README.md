@@ -21,7 +21,7 @@ The demo dataset for the classification task is composed by:
 * 30 samples from lineage P.1 (Brazilian variant);
 * 30 samples from lineage B.1.427/B.1.429 (Californian variant);
 * 30 samples from lineage B.1.525 (Nigerian variant);
-* 
+ 
 The demo dataset for the clustering task is composed by :
 
 * 10 samples from the original cases from Wuhan in January 2020;
