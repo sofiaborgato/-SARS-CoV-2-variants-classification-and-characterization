@@ -12,7 +12,7 @@ We used genome sequences from [`GISAID Dataset`](https://www.gisaid.org/). The d
 * 1000 samples from lineage B.1.525 (Nigerian variant);
 * 500 samples from lineage B.1.617 (Indian variant).
 ### Demo Data
-For the demo trial we prepare two different dataset one for the classification and one for the clustering task.
+For the demo trial we prepared two different dataset one for the supevised task and one for the clustering task.
 The demo dataset for the classification task is composed by:
 
 * 30 samples from the original cases from Wuhan in January 2020;
@@ -22,9 +22,8 @@ The demo dataset for the classification task is composed by:
 * 30 samples from lineage B.1.427/B.1.429 (Californian variant);
 * 30 samples from lineage B.1.525 (Nigerian variant);
  
-The demo dataset for the clustering task is composed by :
+The demo dataset for the unsupervised task is composed by :
 
-* 10 samples from the original cases from Wuhan in January 2020;
 * 10 samples from lineage B.1.1.7 (English variant);
 * 10 samples from lineage B.1.351 (South-African variant);
 * 10 samples from lineage P.1 (Brazilian variant);
