@@ -20,6 +20,7 @@ The root folder of the repo contains:
 * the code to be run as explained in the **Instructions** section;
 * the folder [`Data`](./Data), containing the FASTA files with the genome sequences and the inputs for the demo trial;
 * the folder [`Report`](./Report) with a detailed description of the project and the analyses performed;
+* the folder [`Output`](./Output) where the output of the pipeline is stored, which is then moved to the preferred location
 * the folder [`Classifiers`](./Classifiers) containing the code for the different classifiers implemented;
 
 ## Instructions 
