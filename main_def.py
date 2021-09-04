@@ -70,30 +70,32 @@ while an_type != '1' and an_type != '2':
 
 
 if in_path != '0':
-    stats, genomes_aligned, mutation_list = align_and_process(in_path,string_length=1500) #for each line in path align the genomes and store the result in 
+	stats, genomes_aligned, mutation_list = align_and_process(in_path,string_length=1500) #for each line in path align the genomes and store the result in 
 	#genomes aligned: the aligned genomes
 	#stats: statistics of the aligned genomes 
 	#mutation list :characterization of each mutation found 
-    key_mut = key_mutations(mutation_list, len(stats)) #for each line calculate the most frequent mutations
-    export_data(stats, genomes_aligned,key_mut, name = "new") #store the data in the output folder 
+	key_mut = key_mutations(mutation_list, len(stats)) #for each line calculate the most frequent mutations
+	export_data(stats, genomes_aligned,key_mut, name = "new") #store the data in the output folder 
 
 if in_path ==  '0' and an_type == '1':
 	#use demo data 
-    stats = stats_class 
-    genomes_aligned = genomes_aligned_class
-    key_mut = key_mut_class
-    export_data(stats, genomes_aligned,key_mut, name = "./Output/demo")
-    prediction=classifier(total_stats,stats)#Classifies each line of the stats dataset with the corresponding variants using random forest classifier
-    
+    	stats = stats_class 
+    	genomes_aligned = genomes_aligned_class
+    	key_mut = key_mut_class
+    	prediction=classifier(total_stats,stats)#Classifies each line of the stats dataset with the corresponding variants using random forest classifier
+	stats['Predicted'] = prediction
+	stats.drop(column = 'label', inplace = True)
+	export_data(stats, genomes_aligned,key_mut, name = "./Output/demo")
     
     
 elif in_path == '0' and an_type == '2':
 	stats = stats_clust
 	genomes_aligned = genomes_aligned_clust
 	key_mut = key_mut_clust
-	export_data(stats, genomes_aligned,key_mut, name = "./Output/demo")
 	prediction, num_new_var = clustering(total_stats,stats) 
 	stats['Predicted'] = prediction
+	stats.drop(column = 'label', inplace = True)
+	export_data(stats, genomes_aligned,key_mut, name = "./Output/demo")
 	if num_new_var > 0:
 		for i in range(num_new_var):
 			test_genomes = genomes_aligned[stats.Predicted == i+6]
