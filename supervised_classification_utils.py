@@ -10,6 +10,7 @@ def classifier(data,test):
     import seaborn as sns
     import matplotlib.pyplot as plt
     import pandas as pd
+    import numpy as np
     best_columns=['s_ORF1ab', 'del_ORF1ab', 'mnc_S', 'del_S', 's_E', 's_M', 'mc_N',
        'mnc_N', 'del_N', 'mnc_NON_COD']#Best columns found with RFE,see also Classifiers Folder
     control=data.copy()
