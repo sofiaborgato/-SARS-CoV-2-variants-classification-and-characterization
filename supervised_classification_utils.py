@@ -37,7 +37,7 @@ def classifier(data,test):
     fig = plot.get_figure()
     fig.savefig('./Output/classification_report_plot.png')
     
-    data2['Predicted']= np.concatenate((control['label'],pred))
+    data2['Predicted']= np.concatenate((control['label'],target_test))
     label=data2.pop('Predicted')
     label.astype(np.int32)
     
