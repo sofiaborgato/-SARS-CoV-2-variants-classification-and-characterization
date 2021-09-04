@@ -131,7 +131,7 @@ def clustering(control,test):
     n_new_variants = n_variants-len(pd.unique(control.label))
     label=data.pop('Predicted')
     label.astype(np.int32)
-
+    print(data)
     gene_data=data.groupby((np.arange(len(data.columns)) // 7) + 1, axis=1).sum()
     print(gene_data)
     col_names=["ORF1ab", "S", "ORF3a", "E", "M", "ORF6", "ORF7a", "ORF7b", "ORF8", "N", "ORF10",'NON_COD']
