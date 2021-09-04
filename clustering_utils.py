@@ -147,7 +147,7 @@ def clustering(control,test):
     lis = []
     map = {0 : "Original", 1 : "Californian", 2 : "Brazilian", 3 : "English", 4 : "Nigerian", 5 : "South African"}
     for i in range(n_new_variants):
-        map[len(pd.unique(stat.label))+i] = 'New variant ' + str(i+1)
+        map[len(pd.unique(control.label))+i] = 'New variant ' + str(i+1)
     g.drop(columns='label',inplace=True)
     for col in g:
       for n, el in enumerate(g[col]):
