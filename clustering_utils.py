@@ -28,6 +28,7 @@ def clustering(control,test):
     total=pd.concat([control,test])
     total=nullscan(total)#Check null values
     data=total.drop('label',axis=1,inplace=False)#Drop the true labels
+    print(data.columns)
     label=total['label']
     min_points=20#Set min points values for DBSCAN
     neighbors = NearestNeighbors(n_neighbors=2*len(total.columns),metric='euclidean')#Calculate the distances from the k nearest neighbors for each data 
@@ -102,7 +103,7 @@ def clustering(control,test):
     
     
     data['Predicted']= np.concatenate((control['label'],prediction))
-    
+    print(data.columns)
     # Create crosstab: ct
     ct = pd.crosstab(prediction_pair['true_label'], prediction_pair['pred'])
 
