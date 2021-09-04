@@ -26,6 +26,7 @@ def clustering(control,test):
     import matplotlib.pyplot as plt
     #Concat the control dataset with the one given by the user(or in case the default ones)
     total=pd.concat([control,test])
+    data2=total.drop('label',axis=1,inplace=False)#Drop the true labels
     total=nullscan(total)#Check null values
     data=total.drop('label',axis=1,inplace=False)#Drop the true labels
     print(data.columns)
@@ -100,10 +101,8 @@ def clustering(control,test):
         prediction.append((cl_dict[labels[len(control)+i]]))  #Store the prediction in an array 
     prediction_pair=pd.DataFrame({'true_label':label,'pred':labels})#compare true label with the one founded by clustering algo
     
+   
     
-    
-    data['Predicted']= np.concatenate((control['label'],prediction))
-    print(data.columns)
     # Create crosstab: ct
     ct = pd.crosstab(prediction_pair['true_label'], prediction_pair['pred'])
 
@@ -129,10 +128,11 @@ def clustering(control,test):
     
     
     n_new_variants = n_variants-len(pd.unique(control.label))
-    label=data.pop('Predicted')
+    data2['Predicted']= np.concatenate((control['label'],prediction))
+    label=data2.pop('Predicted')
     label.astype(np.int32)
-    print(data)
-    gene_data=data.groupby((np.arange(len(data.columns)) // 7) + 1, axis=1).sum()
+    
+    gene_data=data2.groupby((np.arange(len(data2.columns)) // 7) + 1, axis=1).sum()
     print(gene_data)
     col_names=["ORF1ab", "S", "ORF3a", "E", "M", "ORF6", "ORF7a", "ORF7b", "ORF8", "N", "ORF10",'NON_COD']
     gene_data.columns=col_names
