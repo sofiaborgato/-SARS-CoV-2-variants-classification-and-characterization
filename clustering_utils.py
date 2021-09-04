@@ -29,7 +29,7 @@ def clustering(control,test):
     data2=total.drop('label',axis=1,inplace=False)#Drop the true labels
     total=nullscan(total)#Check null values
     data=total.drop('label',axis=1,inplace=False)#Drop the true labels
-    print(data.columns)
+    
     label=total['label']
     min_points=20#Set min points values for DBSCAN
     neighbors = NearestNeighbors(n_neighbors=2*len(total.columns),metric='euclidean')#Calculate the distances from the k nearest neighbors for each data 
@@ -133,7 +133,7 @@ def clustering(control,test):
     label.astype(np.int32)
     
     gene_data=data2.groupby((np.arange(len(data2.columns)) // 7) + 1, axis=1).sum()
-    print(gene_data)
+    
     col_names=["ORF1ab", "S", "ORF3a", "E", "M", "ORF6", "ORF7a", "ORF7b", "ORF8", "N", "ORF10",'NON_COD']
     gene_data.columns=col_names
 
