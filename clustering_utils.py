@@ -98,8 +98,11 @@ def clustering(control,test):
     for i in range(0,len(test)):
         prediction.append((cl_dict[labels[len(control)+i]]))  #Store the prediction in an array 
     prediction_pair=pd.DataFrame({'true_label':label,'pred':labels})#compare true label with the one founded by clustering algo
-
-
+    
+    
+    
+    data['Predicted']= np.concatenate((control['label'],prediction))
+    
     # Create crosstab: ct
     ct = pd.crosstab(prediction_pair['true_label'], prediction_pair['pred'])
 
@@ -122,5 +125,38 @@ def clustering(control,test):
     fig = plot.fig
     fig.savefig('./Output/clustering_report_plot.png', bbox_inches='tight')
     
-    return prediction, n_variants-len(pd.unique(control.label))
+    n_new_variants = n_variants-len(pd.unique(control.label))
+    label=data.pop('Predicted')
+    label.astype(np.int32)
+
+    gene_data=data.groupby((np.arange(len(data.columns)) // 7) + 1, axis=1).sum()
+
+    col_names=["ORF1ab", "S", "ORF3a", "E", "M", "ORF6", "ORF7a", "ORF7b", "ORF8", "N", "ORF10",'NON_COD']
+    gene_data.columns=col_names
+
+    gene_data['label']=label
+    g = []
+    for i in range(n_variants):
+      gene = gene_data[gene_data['label']==i].mean()
+      g.append(gene)
+    g = pd.DataFrame(g)
+
+    lis = []
+    map = {0 : "Original", 1 : "Californian", 2 : "Brazilian", 3 : "English", 4 : "Nigerian", 5 : "South African"}
+    for i in range(n_new_variants):
+        map[len(pd.unique(stat.label))+i] = 'New variant ' + str(i+1)
+    g.drop(columns='label',inplace=True)
+    for col in g:
+      for n, el in enumerate(g[col]):
+        row = [el,col,map[n]]
+        lis.append(row)
+    g2 = pd.DataFrame(lis, columns=["Number","Gene","Variant"])
+    plot2 = sns.catplot(x="Gene", y="Number", hue="Variant", kind="bar", data=g2,height=7, aspect=1.4,palette="Paired")
+    plt.ylabel('Avg number of mutations', fontsize=13)
+    plt.xlabel('Gene', fontsize=13)
+    plt.xticks(rotation = 45)
+    fig2 = plot2.fig
+    fig2.savefig('./Output/mutation_report_plot.png', bbox_inches='tight')
+    
+    return prediction, n_new_variants
 
