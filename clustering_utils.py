@@ -145,7 +145,7 @@ def clustering(control,test):
     g = pd.DataFrame(g)
 
     lis = []
-    map = {0 : "Original", 1 : "Californian", 2 : "Brazilian", 3 : "English", 4 : "Nigerian", 5 : "South African"}
+    map = {0 : "Original", 1 : "Epsilon", 2 : "Gamma", 3 : "Alpha", 4 : "Eta", 5 : "Beta"}
     for i in range(n_new_variants):
         map[len(pd.unique(control.label))+i] = 'New variant ' + str(i+1)
     g.drop(columns='label',inplace=True)
