@@ -111,7 +111,7 @@ def clustering(control,test):
 
     m=[]
     #visualize result 
-    map = {0 : "Original", 1 : "Californian", 2 : "Brazilian", 3 : "English", 4 : "Nigerian", 5 : "South African",-1:"Test samples"}
+    map = {0 : "Original", 1 : "Epsilon", 2 : "Gamma", 3 : "Alpha", 4 : "Eta", 5 : "Beta",-1:"Test samples"}
     for variant in range(-1,6):
       for cluster in range(-1,n_clusters-1):
         m.append([confusion_matrix[variant+1,cluster+1],map[variant],cluster])
