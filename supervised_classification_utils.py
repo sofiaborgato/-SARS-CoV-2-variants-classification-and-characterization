@@ -54,7 +54,7 @@ def classifier(data,test):
     g = pd.DataFrame(g)
 
     lis = []
-    map = {0 : "Original", 1 : "Californian", 2 : "Brazilian", 3 : "English", 4 : "Nigerian", 5 : "South African"}
+    map = {0 : "Original", 1 : "Epsilon", 2 : "Gamma", 3 : "Alpha", 4 : "Eta", 5 : "Beta"}
     
     g.drop(columns='label',inplace=True)
     for col in g:
