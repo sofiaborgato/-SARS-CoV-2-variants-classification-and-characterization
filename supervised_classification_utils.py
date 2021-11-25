@@ -27,7 +27,7 @@ def classifier(data,test):
     clf.fit(data,target)
     target_test = clf.predict(test)#make predictions
     
-    map = {0 : "Original", 1 : "Californian", 2 : "Brazilian", 3 : "English", 4 : "Nigerian", 5 : "South African"}
+    map = {0 : "Original", 1 : "Epsilon", 2 : "Gamma", 3 : "Alpha", 4 : "Eta", 5 : "Beta"}
     pred=[]
     for line in target_test:
         pred.append(map[line])
