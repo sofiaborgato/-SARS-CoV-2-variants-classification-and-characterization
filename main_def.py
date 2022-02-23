@@ -79,22 +79,22 @@ if in_path != '0':
 
 if in_path ==  '0' and an_type == '1':
 	#use demo data 
-    	stats = stats_class 
-    	genomes_aligned = genomes_aligned_class
-    	key_mut = key_mut_class
-    	prediction=classifier(total_stats,stats)#Classifies each line of the stats dataset with the corresponding variants using random forest classifier
-	stats['Predicted'] = prediction
-	stats.drop(column = 'label', inplace = True)
-	export_data(stats, genomes_aligned,key_mut, name = "./Output/demo")
+    stats = stats_class 
+    genomes_aligned = genomes_aligned_class
+    key_mut = key_mut_class
+    prediction=classifier(total_stats,stats)
+    stats['Predicted'] = prediction
+    stats.drop(columns= 'label', inplace = True)
+    export_data(stats, genomes_aligned,key_mut, name = "./Output/demo")
     
     
 elif in_path == '0' and an_type == '2':
 	stats = stats_clust
 	genomes_aligned = genomes_aligned_clust
 	key_mut = key_mut_clust
-	prediction, num_new_var = clustering(total_stats,stats) 
+	prediction, num_new_var = clustering(total_stats,stats)
 	stats['Predicted'] = prediction
-	stats.drop(column = 'label', inplace = True)
+	stats.drop(columns = 'label', inplace = True)
 	export_data(stats, genomes_aligned,key_mut, name = "./Output/demo")
 	if num_new_var > 0:
 		for i in range(num_new_var):
