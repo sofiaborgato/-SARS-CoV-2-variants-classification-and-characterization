@@ -67,6 +67,8 @@ def clustering(control,test):
     n_clusters_ = len(np.unique(labels))
     print('n_clusters:',n_clusters_)
     from sklearn import metrics
+    f= open('./Output/clustering_performance',"w+")
+    f.write('Estimated number of clusters: %d \n' % n_clusters_)
     print('Estimated number of clusters: %d' % n_clusters_)
     print("Homogeneity: %0.3f" % metrics.homogeneity_score(label, labels))
     print("Completeness: %0.3f" % metrics.completeness_score(label, labels))
