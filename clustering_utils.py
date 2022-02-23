@@ -112,7 +112,7 @@ def clustering(control,test):
     m=[]
     #visualize result 
     map = {0 : "Original", 1 : "Epsilon", 2 : "Gamma", 3 : "Alpha", 4 : "Eta", 5 : "Beta",-1:"Test samples"}
-    
+    n_new_variants = n_variants-len(pd.unique(control.label))
     map_cluster = {-1:"Outliers",0 : "Original", 1 : "Epsilon", 2 : "Gamma", 3 : "Alpha", 4 : "Eta", 5 : "Beta"}
     for i in range(n_new_variants):
         map[len(pd.unique(control.label))+i] = 'New variant ' + str(i+1)
@@ -132,7 +132,7 @@ def clustering(control,test):
     
     
     
-    n_new_variants = n_variants-len(pd.unique(control.label))
+    
     data2['Predicted']= np.concatenate((control['label'],prediction))
     label=data2.pop('Predicted')
     label.astype(np.int32)
