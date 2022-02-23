@@ -119,8 +119,6 @@ def clustering(control,test):
     for variant in range(-1,6):
       for cluster in range(-1,n_clusters-1):
         m.append([confusion_matrix[variant+1,cluster+1],map[variant],map_cluster[cluster]])
-    print(m)
-    print(confusion_matrix)
     df=pd.DataFrame(m,columns=["Value", "Variant", "Cluster"])
 
     c = sns.color_palette('Paired')
@@ -167,5 +165,5 @@ def clustering(control,test):
     fig2 = plot2.fig
     fig2.savefig('./Output/mutation_report_plot.png', bbox_inches='tight')
     
-    return map_cluster(prediction), n_new_variants
+    return map_cluster[prediction], n_new_variants
 
