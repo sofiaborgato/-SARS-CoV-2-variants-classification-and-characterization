@@ -165,5 +165,5 @@ def clustering(control,test):
     fig2 = plot2.fig
     fig2.savefig('./Output/mutation_report_plot.png', bbox_inches='tight')
     
-    return map_cluster[prediction], n_new_variants
+    return [map_cluster[p] for p in prediction], n_new_variants
 
