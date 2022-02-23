@@ -69,6 +69,16 @@ def clustering(control,test):
     from sklearn import metrics
     f= open('./Output/clustering_performance',"w+")
     f.write('Estimated number of clusters: %d \n' % n_clusters_)
+    f.write("Homogeneity: %0.3f \n" % metrics.homogeneity_score(label, labels))
+    f.write("Completeness: %0.3f \n" % metrics.completeness_score(label, labels))
+    f.write("V-measure: %0.3f \n" % metrics.v_measure_score(label, labels))
+    f.write("Adjusted Rand Index: %0.3f \n"
+          % metrics.adjusted_rand_score(label, labels))
+    f.write("Adjusted Mutual Information: %0.3f \n"
+          % metrics.adjusted_mutual_info_score(label, labels))
+    f.write("Silhouette Coefficient %0.3f \n"
+          % metrics.silhouette_score(data, labels, metric='euclidean'))
+    f.close()
     print('Estimated number of clusters: %d' % n_clusters_)
     print("Homogeneity: %0.3f" % metrics.homogeneity_score(label, labels))
     print("Completeness: %0.3f" % metrics.completeness_score(label, labels))
