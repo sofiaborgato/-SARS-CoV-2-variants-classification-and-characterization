@@ -112,9 +112,14 @@ def clustering(control,test):
     m=[]
     #visualize result 
     map = {0 : "Original", 1 : "Epsilon", 2 : "Gamma", 3 : "Alpha", 4 : "Eta", 5 : "Beta",-1:"Test samples"}
+    
+    map_cluster = {-1:"Outliers",0 : "Original", 1 : "Epsilon", 2 : "Gamma", 3 : "Alpha", 4 : "Eta", 5 : "Beta"}
+    for i in range(n_new_variants):
+        map[len(pd.unique(control.label))+i] = 'New variant ' + str(i+1)
     for variant in range(-1,6):
       for cluster in range(-1,n_clusters-1):
-        m.append([confusion_matrix[variant+1,cluster+1],map[variant],cluster])
+        m.append([confusion_matrix[variant+1,cluster+1],map[variant],map_cluster[cluster]])
+        
     df=pd.DataFrame(m,columns=["Value", "Variant", "Cluster"])
 
     c = sns.color_palette('Paired')
@@ -161,5 +166,5 @@ def clustering(control,test):
     fig2 = plot2.fig
     fig2.savefig('./Output/mutation_report_plot.png', bbox_inches='tight')
     
-    return prediction, n_new_variants
+    return m[:,2], n_new_variants
 
