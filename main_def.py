@@ -113,4 +113,4 @@ elif in_path == '0' and an_type == '2':
 
 os.chmod(os.path.join(path,'Bioinformatic_project'), stat.S_IWRITE)	
 shutil.copytree(os.path.join(path,'Bioinformatic_project/Output'),os.path.join(out_path,out_name))
-shutil.rmtree(os.path.join(path,'Bioinformatic_project'), onerror=remove_readonly)
+shutil.rmtree(os.path.join(path,'Bioinformatic_project'))
