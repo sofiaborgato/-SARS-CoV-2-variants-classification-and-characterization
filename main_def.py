@@ -4,6 +4,7 @@
 import os
 path=os.getcwd() 
 import git
+import stat
 import shutil 
 if not 'Bioinformatic_project' in os.listdir(path):
     print('Downloading the Git repo...')
