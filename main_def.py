@@ -111,6 +111,13 @@ elif in_path == '0' and an_type == '2':
 			key_mut_new.to_csv(os.path.join("./Output",name))
 
 
-os.chmod(os.path.join(path,'Bioinformatic_project'), stat.S_IWRITE)	
+def onerror(func, path, exc_info):
+    if not os.access(path, os.W_OK):
+        os.chmod(path, stat.S_IWUSR)
+        func(path)
+    else:
+        raise
+os.chdir(path)	
 shutil.copytree(os.path.join(path,'Bioinformatic_project/Output'),os.path.join(out_path,out_name))
-shutil.rmtree(os.path.join(path,'Bioinformatic_project'))
+shutil.rmtree(os.path.join(path,'Bioinformatic_project'),onerror = onerror)
+
