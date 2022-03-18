@@ -96,10 +96,10 @@ elif in_path == '0' and an_type == '2':
 	prediction, num_new_var = clustering(total_stats,stats)
 	stats['Predicted'] = prediction
 	stats.drop(columns = 'label', inplace = True)
-	export_data(stats, genomes_aligned,key_mut, name = "./Output/demo")
+	export_data(stats, genomes_aligned, key_mut, name = "./Output/demo")
 	if num_new_var > 0:
 		for i in range(num_new_var):
-			test_genomes = genomes_aligned[stats.Predicted == i+6]
+			test_genomes = genomes_aligned[stats.Predicted == "New variant " + str(i+1)]
 			mutation_list_new=[]
 			for n,genome in test_genomes.iterrows():
 				mut_list_new, _ = process_mutations(genome[0], genome[1])
@@ -108,8 +108,7 @@ elif in_path == '0' and an_type == '2':
 			key_mut_new = key_mutations(mutation_list_new, len(test_genomes))
 			#print((key_mut_new))
 			name = "New variant_" + str(i+1) + "_key mutations.csv"
-			key_mut_new.to_csv(os.path.join("./Output",name))
-
+			key_mut_new.to_csv(os.path.join("./Output",name), index=False)
 
 def onerror(func, path, exc_info):
     if not os.access(path, os.W_OK):
@@ -120,4 +119,3 @@ def onerror(func, path, exc_info):
 os.chdir(path)	
 shutil.copytree(os.path.join(path,'Bioinformatic_project/Output'),os.path.join(out_path,out_name))
 shutil.rmtree(os.path.join(path,'Bioinformatic_project'),onerror = onerror)
-
