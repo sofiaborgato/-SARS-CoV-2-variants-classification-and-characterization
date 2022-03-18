@@ -109,5 +109,9 @@ elif in_path == '0' and an_type == '2':
 			name = "New variant_" + str(i+1) + "_key mutations.csv"
 			key_mut_new.to_csv(os.path.join("./Output",name))
 
+def remove_readonly(func, path, excinfo):
+    os.chmod(path, stat.S_IWRITE)
+    func(path)
+	
 shutil.copytree(os.path.join(path,'Bioinformatic_project/Output'),os.path.join(out_path,out_name))
-shutil.rmtree(os.path.join(path,'Bioinformatic_project'))
+shutil.rmtree(os.path.join(path,'Bioinformatic_project'), onerror=remove_readonly)
