@@ -60,14 +60,12 @@ def clustering(control,test):
                 else:
                     counter = 0 #go to the next sequence of zero
         
-    print('best_eps= ' + str(best_eps))
     af = DBSCAN(eps=best_eps,min_samples=min_points,metric='euclidean').fit(data)#perform DBSCAN
     
     labels = af.labels_
     n_clusters_ = len(np.unique(labels))
-    print('n_clusters:',n_clusters_)
     from sklearn import metrics
-    f= open('./Output/clustering_performance.txt',"w+")
+    f=open('./Output/clustering_performance.txt',"w+")
     f.write('Estimated number of clusters: %d \n' % n_clusters_)
     f.write("Homogeneity: %0.3f \n" % metrics.homogeneity_score(label, labels))
     f.write("Completeness: %0.3f \n" % metrics.completeness_score(label, labels))
@@ -79,16 +77,6 @@ def clustering(control,test):
     f.write("Silhouette Coefficient %0.3f \n"
           % metrics.silhouette_score(data, labels, metric='euclidean'))
     f.close()
-    #print('Estimated number of clusters: %d' % n_clusters_)
-    #print("Homogeneity: %0.3f" % metrics.homogeneity_score(label, labels))
-    #print("Completeness: %0.3f" % metrics.completeness_score(label, labels))
-    #print("V-measure: %0.3f" % metrics.v_measure_score(label, labels))
-    #print("Adjusted Rand Index: %0.3f"
-          #% metrics.adjusted_rand_score(label, labels))
-    #print("Adjusted Mutual Information: %0.3f"
-          #% metrics.adjusted_mutual_info_score(label, labels))
-   # print("Silhouette Coefficient %0.3f"
-          #% metrics.silhouette_score(data, labels, metric='euclidean'))
     
     n_variants=len(pd.unique(control.label)) #number of known variants 
     n_clusters = len(pd.unique(labels))# number of cluster founded 
